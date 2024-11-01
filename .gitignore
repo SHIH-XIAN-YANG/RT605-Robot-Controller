@@ -112,3 +112,6 @@ Makefile
 !ci/build.gitlab-ci.yml
 *.pdb
 *.tlog
+*.recipe
+*.exp
+*.rtss
