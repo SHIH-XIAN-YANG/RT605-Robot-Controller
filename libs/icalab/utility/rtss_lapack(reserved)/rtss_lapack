@@ -1,0 +1,9 @@
+/*
+    - Create: 2022/08/23, b.r.tseng
+	- Edit:   2022/08/24, b.r.tseng
+*/
+#ifndef __RTSS_LAPACK_H___H__
+#define __RTSS_LAPACK_H__
+#include"rtss_matrix.h"
+
+#endif
