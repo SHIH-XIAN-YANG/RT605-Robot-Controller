@@ -30,3 +30,85 @@
 *.exe
 *.out
 *.app
+
+
+data_log/
+*.csv
+Intp_log/
+*.txt
+
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+*.vs
+
+qrc_*cxx
+*.orig
+*.pyc
+*.diff
+diff
+*.save
+save
+*.old
+*.gmo
+*.qm
+core
+core.*
+*.bak
+*~
+*build*
+*.moc.*
+*.moc
+ui_*
+CMakeCache.txt
+tags
+.*.swp
+activity.png
+*.out
+*.php*
+*.log
+*.orig
+*.rej
+log
+patch
+*.patch
+a
+a.*
+lapack/testing
+lapack/reference
+.*project
+.settings
+Makefile
+!ci/build.gitlab-ci.yml
+*.pdb
+*.tlog

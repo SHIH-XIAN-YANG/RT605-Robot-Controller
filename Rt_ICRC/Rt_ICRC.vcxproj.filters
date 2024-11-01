@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="MechanismAnalyzer">
+      <UniqueIdentifier>{73fb66b1-dbf4-49b3-b2b9-3a39eecffa81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="peripheral">
+      <UniqueIdentifier>{281005d6-22e3-4e88-b1bb-1313b56a9eb5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Robot Controller">
+      <UniqueIdentifier>{a30fa8b9-f7ed-4f9c-97c9-7824376ba9dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cJSON">
+      <UniqueIdentifier>{f818dddd-578d-48dd-b9e0-8ca93d35d508}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SinusoidalTest">
+      <UniqueIdentifier>{1804ce58-edd5-440e-b624-896be20b0610}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Rt_ICRC.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rt_cyclic_routine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MechanismAnalyzer.cpp">
+      <Filter>MechanismAnalyzer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libs\icalab\rc\peripheral\peripheral.cpp">
+      <Filter>peripheral</Filter>
+    </ClCompile>
+    <ClCompile Include="RT_Robot_Controller.cpp">
+      <Filter>Robot Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="cJSON.c">
+      <Filter>cJSON</Filter>
+    </ClCompile>
+    <ClCompile Include="SinusoidalTest.cpp">
+      <Filter>SinusoidalTest</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Rt_ICRC.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\lib\ICAL\Robotics\RT605\Kinematics\rt605Kinematics.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="system_ethercat_setting.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\icalab\rc\ParameterEditor\ParameterEditor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\icalab\dsp\filter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libs\shared.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rt_cyclic_routine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rt_process.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MechanismAnalyzer.h">
+      <Filter>MechanismAnalyzer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libs\icalab\rc\peripheral\peripheral.h">
+      <Filter>peripheral</Filter>
+    </ClInclude>
+    <ClInclude Include="RT_Robot_Controller.h">
+      <Filter>Robot Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="cJSON.h">
+      <Filter>cJSON</Filter>
+    </ClInclude>
+    <ClInclude Include="SinusoidalTest.h">
+      <Filter>SinusoidalTest</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
