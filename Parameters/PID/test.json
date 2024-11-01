@@ -1,0 +1,64 @@
+{
+	"robotPID":	{
+		"J1":	{
+			"velocity":	{
+				"kp":	3,
+				"ki":	4
+			},
+			"position":	{
+				"kp":	1,
+				"ki":	2
+			}
+		},
+		"J2":	{
+			"velocity":	{
+				"kp":	3,
+				"ki":	4
+			},
+			"position":	{
+				"kp":	1,
+				"ki":	2
+			}
+		},
+		"J3":	{
+			"velocity":	{
+				"kp":	3,
+				"ki":	4
+			},
+			"position":	{
+				"kp":	1,
+				"ki":	2
+			}
+		},
+		"J4":	{
+			"velocity":	{
+				"kp":	3,
+				"ki":	4
+			},
+			"position":	{
+				"kp":	1,
+				"ki":	2
+			}
+		},
+		"J5":	{
+			"velocity":	{
+				"kp":	3,
+				"ki":	4
+			},
+			"position":	{
+				"kp":	1,
+				"ki":	2
+			}
+		},
+		"J6":	{
+			"velocity":	{
+				"kp":	3,
+				"ki":	4
+			},
+			"position":	{
+				"kp":	1,
+				"ki":	2
+			}
+		}
+	}
+}
