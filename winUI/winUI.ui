@@ -53,7 +53,7 @@
            <locale language="Corsican" country="France"/>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>4</number>
           </property>
           <widget class="QWidget" name="tab_system">
            <attribute name="title">
@@ -1593,7 +1593,7 @@
                        <x>0</x>
                        <y>0</y>
                        <width>1170</width>
-                       <height>159</height>
+                       <height>174</height>
                       </rect>
                      </property>
                      <layout class="QHBoxLayout" name="horizontalLayout_31">
@@ -2786,8 +2786,8 @@
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>670</width>
-                 <height>663</height>
+                 <width>955</width>
+                 <height>714</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_29" stretch="5,6,0">
@@ -5049,9 +5049,9 @@
               <height>731</height>
              </rect>
             </property>
-            <layout class="QHBoxLayout" name="horizontalLayout_9" stretch="1,6">
+            <layout class="QHBoxLayout" name="horizontalLayout_9" stretch="1,3">
              <item>
-              <layout class="QVBoxLayout" name="verticalLayout_2" stretch="1,0,0,0,0,0,0,0,0,0,0,0">
+              <layout class="QVBoxLayout" name="verticalLayout_2" stretch="1,0,0,0,0,0,0,0,0,0,0,0,0">
                <item>
                 <widget class="QPushButton" name="pb_SetupSinusoidalTest">
                  <property name="text">
@@ -5224,6 +5224,16 @@ The α value allows you to adjust the trade-off between reducing spectral leakag
                 </widget>
                </item>
                <item>
+                <widget class="QPushButton" name="pushButton">
+                 <property name="toolTip">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Run the sinusoidal test and the model will classify the lagging joints&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="text">
+                  <string>Servo Diagnose</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
                 <spacer name="verticalSpacer">
                  <property name="orientation">
                   <enum>Qt::Vertical</enum>
@@ -5312,80 +5322,15 @@ The α value allows you to adjust the trade-off between reducing spectral leakag
                       </widget>
                      </item>
                      <item>
-                      <layout class="QGridLayout" name="gridLayout_18" rowstretch="1,1" columnstretch="1,2" columnminimumwidth="1,2">
-                       <item row="1" column="0">
-                        <widget class="QLabel" name="label_194">
-                         <property name="text">
-                          <string>Velocity</string>
-                         </property>
-                         <property name="alignment">
-                          <set>Qt::AlignCenter</set>
-                         </property>
-                        </widget>
-                       </item>
+                      <layout class="QGridLayout" name="gridLayout_18" rowstretch="1,0" columnstretch="1">
                        <item row="0" column="0">
-                        <widget class="QLabel" name="label_195">
-                         <property name="layoutDirection">
-                          <enum>Qt::LeftToRight</enum>
-                         </property>
-                         <property name="text">
-                          <string>Position</string>
-                         </property>
-                         <property name="alignment">
-                          <set>Qt::AlignCenter</set>
-                         </property>
-                        </widget>
-                       </item>
-                       <item row="1" column="1">
-                        <layout class="QVBoxLayout" name="verticalLayout_56">
-                         <item>
-                          <layout class="QHBoxLayout" name="horizontalLayout_88" stretch="1,2">
-                           <item>
-                            <widget class="QLabel" name="label_196">
-                             <property name="text">
-                              <string>Kp</string>
-                             </property>
-                             <property name="alignment">
-                              <set>Qt::AlignCenter</set>
-                             </property>
-                            </widget>
-                           </item>
-                           <item>
-                            <widget class="QDoubleSpinBox" name="kvp">
-                             <property name="toolTip">
-                              <string>range: [1, 2000] (Hz)</string>
-                             </property>
-                            </widget>
-                           </item>
-                          </layout>
-                         </item>
-                         <item>
-                          <layout class="QHBoxLayout" name="horizontalLayout_89" stretch="1,2">
-                           <item>
-                            <widget class="QLabel" name="label_197">
-                             <property name="text">
-                              <string>Ti</string>
-                             </property>
-                             <property name="alignment">
-                              <set>Qt::AlignCenter</set>
-                             </property>
-                            </widget>
-                           </item>
-                           <item>
-                            <widget class="QDoubleSpinBox" name="kvi"/>
-                           </item>
-                          </layout>
-                         </item>
-                        </layout>
-                       </item>
-                       <item row="0" column="1">
                         <layout class="QVBoxLayout" name="verticalLayout_57">
                          <item>
                           <layout class="QHBoxLayout" name="horizontalLayout_90" stretch="1,2">
                            <item>
                             <widget class="QLabel" name="label_198">
                              <property name="text">
-                              <string>Kp</string>
+                              <string>Kpp</string>
                              </property>
                              <property name="alignment">
                               <set>Qt::AlignCenter</set>
@@ -5406,7 +5351,7 @@ The α value allows you to adjust the trade-off between reducing spectral leakag
                            <item>
                             <widget class="QLabel" name="label_199">
                              <property name="text">
-                              <string>Ti</string>
+                              <string>Tpi</string>
                              </property>
                              <property name="alignment">
                               <set>Qt::AlignCenter</set>
@@ -5424,6 +5369,48 @@ The α value allows you to adjust the trade-off between reducing spectral leakag
                          </item>
                         </layout>
                        </item>
+                       <item row="1" column="0">
+                        <layout class="QVBoxLayout" name="verticalLayout_56">
+                         <item>
+                          <layout class="QHBoxLayout" name="horizontalLayout_88" stretch="1,2">
+                           <item>
+                            <widget class="QLabel" name="label_196">
+                             <property name="text">
+                              <string>Kvp</string>
+                             </property>
+                             <property name="alignment">
+                              <set>Qt::AlignCenter</set>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QDoubleSpinBox" name="kvp">
+                             <property name="toolTip">
+                              <string>range: [1, 2000] (Hz)</string>
+                             </property>
+                            </widget>
+                           </item>
+                          </layout>
+                         </item>
+                         <item>
+                          <layout class="QHBoxLayout" name="horizontalLayout_89" stretch="1,2">
+                           <item>
+                            <widget class="QLabel" name="label_197">
+                             <property name="text">
+                              <string>Tvi</string>
+                             </property>
+                             <property name="alignment">
+                              <set>Qt::AlignCenter</set>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QDoubleSpinBox" name="kvi"/>
+                           </item>
+                          </layout>
+                         </item>
+                        </layout>
+                       </item>
                       </layout>
                      </item>
                     </layout>
@@ -5435,9 +5422,9 @@ The α value allows you to adjust the trade-off between reducing spectral leakag
               </layout>
              </item>
              <item>
-              <widget class="QTabWidget" name="tabWidget_2">
+              <widget class="QTabWidget" name="tab_lagrange_polnomial">
                <property name="currentIndex">
-                <number>1</number>
+                <number>2</number>
                </property>
                <widget class="QWidget" name="tab">
                 <attribute name="title">
@@ -5452,7 +5439,7 @@ The α value allows you to adjust the trade-off between reducing spectral leakag
                    <height>671</height>
                   </rect>
                  </property>
-                 <layout class="QVBoxLayout" name="sinusoidal_layout"/>
+                 <layout class="QVBoxLayout" name="sinusoidal_layout_q"/>
                 </widget>
                 <widget class="QLabel" name="sinusoidal_save_file_label">
                  <property name="geometry">
@@ -5466,6 +5453,49 @@ The α value allows you to adjust the trade-off between reducing spectral leakag
                  <property name="text">
                   <string>-</string>
                  </property>
+                </widget>
+                <widget class="QWidget" name="verticalLayoutWidget_4">
+                 <property name="geometry">
+                  <rect>
+                   <x>0</x>
+                   <y>0</y>
+                   <width>581</width>
+                   <height>671</height>
+                  </rect>
+                 </property>
+                 <layout class="QVBoxLayout" name="sinusoidal_layout_q_err"/>
+                </widget>
+                <widget class="QWidget" name="verticalLayoutWidget_5">
+                 <property name="geometry">
+                  <rect>
+                   <x>620</x>
+                   <y>30</y>
+                   <width>71</width>
+                   <height>51</height>
+                  </rect>
+                 </property>
+                 <layout class="QVBoxLayout" name="verticalLayout_7">
+                  <item>
+                   <widget class="QRadioButton" name="q_radioButton">
+                    <property name="enabled">
+                     <bool>true</bool>
+                    </property>
+                    <property name="text">
+                     <string>q</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QRadioButton" name="q_err_radioButton">
+                    <property name="enabled">
+                     <bool>true</bool>
+                    </property>
+                    <property name="text">
+                     <string>q Error</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
                 </widget>
                </widget>
                <widget class="QWidget" name="tab_2">
@@ -5485,6 +5515,271 @@ The α value allows you to adjust the trade-off between reducing spectral leakag
                   <property name="spacing">
                    <number>0</number>
                   </property>
+                 </layout>
+                </widget>
+               </widget>
+               <widget class="QWidget" name="tab_3">
+                <attribute name="title">
+                 <string>Lagrange polynomial</string>
+                </attribute>
+                <widget class="QWidget" name="lagrange_poly_scope" native="true">
+                 <property name="geometry">
+                  <rect>
+                   <x>0</x>
+                   <y>0</y>
+                   <width>431</width>
+                   <height>391</height>
+                  </rect>
+                 </property>
+                </widget>
+                <widget class="QGroupBox" name="groupBox_10">
+                 <property name="geometry">
+                  <rect>
+                   <x>10</x>
+                   <y>530</y>
+                   <width>461</width>
+                   <height>151</height>
+                  </rect>
+                 </property>
+                 <property name="title">
+                  <string>Next Recommand Gain</string>
+                 </property>
+                 <widget class="QWidget" name="layoutWidget">
+                  <property name="geometry">
+                   <rect>
+                    <x>10</x>
+                    <y>20</y>
+                    <width>441</width>
+                    <height>121</height>
+                   </rect>
+                  </property>
+                  <layout class="QHBoxLayout" name="horizontalLayout_44" stretch="1,1">
+                   <item>
+                    <layout class="QGridLayout" name="gridLayout_19" rowstretch="1,0" columnstretch="1">
+                     <item row="0" column="0">
+                      <layout class="QVBoxLayout" name="verticalLayout_58">
+                       <item>
+                        <layout class="QHBoxLayout" name="horizontalLayout_92" stretch="1,2">
+                         <item>
+                          <widget class="QLabel" name="label_200">
+                           <property name="text">
+                            <string>Kpp</string>
+                           </property>
+                           <property name="alignment">
+                            <set>Qt::AlignCenter</set>
+                           </property>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QDoubleSpinBox" name="kpp_2">
+                           <property name="toolTip">
+                            <string>range: [1, 3000] (1/s)</string>
+                           </property>
+                          </widget>
+                         </item>
+                        </layout>
+                       </item>
+                       <item>
+                        <layout class="QHBoxLayout" name="horizontalLayout_93" stretch="1,2">
+                         <item>
+                          <widget class="QLabel" name="label_201">
+                           <property name="text">
+                            <string>Tpi</string>
+                           </property>
+                           <property name="alignment">
+                            <set>Qt::AlignCenter</set>
+                           </property>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QDoubleSpinBox" name="kpi_2">
+                           <property name="toolTip">
+                            <string>range: [3, 10000] (0.1ms)</string>
+                           </property>
+                          </widget>
+                         </item>
+                        </layout>
+                       </item>
+                      </layout>
+                     </item>
+                     <item row="1" column="0">
+                      <layout class="QVBoxLayout" name="verticalLayout_61">
+                       <item>
+                        <layout class="QHBoxLayout" name="horizontalLayout_94" stretch="1,2">
+                         <item>
+                          <widget class="QLabel" name="label_202">
+                           <property name="text">
+                            <string>Kvp</string>
+                           </property>
+                           <property name="alignment">
+                            <set>Qt::AlignCenter</set>
+                           </property>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QDoubleSpinBox" name="kvp_2">
+                           <property name="toolTip">
+                            <string>range: [1, 2000] (Hz)</string>
+                           </property>
+                          </widget>
+                         </item>
+                        </layout>
+                       </item>
+                       <item>
+                        <layout class="QHBoxLayout" name="horizontalLayout_95" stretch="1,2">
+                         <item>
+                          <widget class="QLabel" name="label_203">
+                           <property name="text">
+                            <string>Tvi</string>
+                           </property>
+                           <property name="alignment">
+                            <set>Qt::AlignCenter</set>
+                           </property>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QDoubleSpinBox" name="kvi_2"/>
+                         </item>
+                        </layout>
+                       </item>
+                      </layout>
+                     </item>
+                    </layout>
+                   </item>
+                   <item>
+                    <layout class="QVBoxLayout" name="verticalLayout_4">
+                     <item>
+                      <layout class="QHBoxLayout" name="horizontalLayout_47" stretch="2,1">
+                       <item>
+                        <widget class="QLabel" name="label_127">
+                         <property name="text">
+                          <string>Current lagging joint</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QLabel" name="label_128">
+                         <property name="text">
+                          <string>0</string>
+                         </property>
+                        </widget>
+                       </item>
+                      </layout>
+                     </item>
+                     <item>
+                      <layout class="QHBoxLayout" name="horizontalLayout_45" stretch="2,1">
+                       <item>
+                        <widget class="QLabel" name="label_99">
+                         <property name="text">
+                          <string>Current iteration:</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QLabel" name="label_100">
+                         <property name="text">
+                          <string>0</string>
+                         </property>
+                        </widget>
+                       </item>
+                      </layout>
+                     </item>
+                     <item>
+                      <widget class="QPushButton" name="pb_setPID_2">
+                       <property name="text">
+                        <string>Accept Gain</string>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </item>
+                  </layout>
+                 </widget>
+                </widget>
+                <widget class="QTableWidget" name="points_table">
+                 <property name="geometry">
+                  <rect>
+                   <x>440</x>
+                   <y>10</y>
+                   <width>251</width>
+                   <height>354</height>
+                  </rect>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">background-color: rgb(255, 255, 255)</string>
+                 </property>
+                 <attribute name="horizontalHeaderDefaultSectionSize">
+                  <number>124</number>
+                 </attribute>
+                 <column>
+                  <property name="text">
+                   <string>gain</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text">
+                   <string>feature</string>
+                  </property>
+                 </column>
+                </widget>
+                <widget class="QWidget" name="layoutWidget_2">
+                 <property name="geometry">
+                  <rect>
+                   <x>440</x>
+                   <y>370</y>
+                   <width>251</width>
+                   <height>26</height>
+                  </rect>
+                 </property>
+                 <layout class="QHBoxLayout" name="horizontalLayout_48">
+                  <item>
+                   <widget class="QLabel" name="label_131">
+                    <property name="font">
+                     <font>
+                      <family>Calibri</family>
+                      <pointsize>14</pointsize>
+                     </font>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">QLabel { color: rgb(0, 0, 0); }</string>
+                    </property>
+                    <property name="text">
+                     <string>Points</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QSlider" name="points_slider">
+                    <property name="maximum">
+                     <number>0</number>
+                    </property>
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="tickPosition">
+                     <enum>QSlider::TicksBelow</enum>
+                    </property>
+                    <property name="tickInterval">
+                     <number>1</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="points_count_label">
+                    <property name="minimumSize">
+                     <size>
+                      <width>20</width>
+                      <height>0</height>
+                     </size>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">QLabel { color: rgb(0, 0, 0); }</string>
+                    </property>
+                    <property name="text">
+                     <string>0</string>
+                    </property>
+                   </widget>
+                  </item>
                  </layout>
                 </widget>
                </widget>

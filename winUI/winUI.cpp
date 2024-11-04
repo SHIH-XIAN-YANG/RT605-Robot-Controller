@@ -617,6 +617,7 @@ winUI::winUI(QWidget *parent)
     //    RtSetEvent(h_ui_ackEvent);
     //    });
 #pragma endregion MovePtpToolOrientation
+    //
     QObject::connect(ui.pb_apply_jogProfile, &QPushButton::clicked, [&]() {
         float cmd[6] = {    (float)ui.edit_jog_joint_speed->value(),
                             (float)ui.edit_jog_joint_maxSpeed->value(),
@@ -711,10 +712,10 @@ winUI::winUI(QWidget *parent)
                             ui.edit_sweep_initial_J6->value(),
                             0.0
         };
-        
+        this->confirm_frequency_sweep_set = true;
         
         rtss_task_status->busy = true;
-        ui_mail->WriteMessage(h_ui_accessEvent, Node::Win_HMI, Node::RTSS_main, UI_Action::StartFrequencySweepALL, 1, DataType::Bit, WRITE_CMD(cmd));
+        ui_mail->WriteMessage(h_ui_accessEvent, Node::Win_HMI, Node::RTSS_main, UI_Action::StartFrequencySweepALL, 16, DataType::F64array36, WRITE_CMD(cmd));
         RtSetEvent(h_ui_ackEvent);
 
         emit signal_RTSSwaiting();
@@ -830,8 +831,8 @@ winUI::winUI(QWidget *parent)
         // Calculate the total height and width of all widgets in the layout
         int width = 0;
         int height = 0;
-        for (int i = 0; i < ui.sinusoidal_layout->count(); ++i) {
-            QWidget* widget = ui.sinusoidal_layout->itemAt(i)->widget();
+        for (int i = 0; i < ui.sinusoidal_layout_q->count(); ++i) {
+            QWidget* widget = ui.sinusoidal_layout_q->itemAt(i)->widget();
             if (widget) {
                 width = std::max(width, widget->width());
                 height += widget->height();
@@ -846,8 +847,8 @@ winUI::winUI(QWidget *parent)
 
         // Render each widget into the pixmap
         int yOffset = 0;
-        for (int i = 0; i < ui.sinusoidal_layout->count(); ++i) {
-            QWidget* widget = ui.sinusoidal_layout->itemAt(i)->widget();
+        for (int i = 0; i < ui.sinusoidal_layout_q->count(); ++i) {
+            QWidget* widget = ui.sinusoidal_layout_q->itemAt(i)->widget();
             if (widget) {
                 widget->render(&painter, QPoint(0, yOffset));
                 yOffset += widget->height();
@@ -915,7 +916,38 @@ winUI::winUI(QWidget *parent)
     //
     QObject::connect(this, &winUI::signal_EnableGUI, this, &winUI::slot_EnableGUI);
     //
-
+    QObject::connect(ui.q_radioButton, &QRadioButton::clicked, this, [&]() {
+        ui.q_err_radioButton->setChecked(FALSE);
+        // To make all widgets inside the layout invisible
+        for (int i = 0; i < ui.sinusoidal_layout_q->count(); ++i) {
+            QWidget* widget = ui.sinusoidal_layout_q->itemAt(i)->widget();
+            if (widget) {
+                widget->setVisible(TRUE); // or widget->hide();
+            }
+        }
+        for (int i = 0; i < ui.sinusoidal_layout_q_err->count(); ++i) {
+            QWidget* widget = ui.sinusoidal_layout_q_err->itemAt(i)->widget();
+            if (widget) {
+                widget->setVisible(FALSE); // or widget->hide();
+            }
+        }
+        });
+    QObject::connect(ui.q_err_radioButton, &QRadioButton::clicked, this, [&]() {
+        ui.q_radioButton->setChecked(FALSE);
+        // To make all widgets inside the layout invisible
+        for (int i = 0; i < ui.sinusoidal_layout_q->count(); ++i) {
+            QWidget* widget = ui.sinusoidal_layout_q->itemAt(i)->widget();
+            if (widget) {
+                widget->setVisible(false); // or widget->hide();
+            }
+        }
+        for (int i = 0; i < ui.sinusoidal_layout_q_err->count(); ++i) {
+            QWidget* widget = ui.sinusoidal_layout_q_err->itemAt(i)->widget();
+            if (widget) {
+                widget->setVisible(TRUE); // or widget->hide();
+            }
+        }
+        });
     
 
 
@@ -1185,14 +1217,12 @@ void winUI::setupPlots(void) {
 }
 
 void winUI::plot_sinusoidalTest_result(char* log_path) {
-    ui.sinusoidal_save_file_label->setText(QString(log_path));
     FILE* fs = nullptr;
     errno_t err = fopen_s(&fs, log_path, "r");
     if (err != 0) {
         QMessageBox::warning(nullptr, "Error", "Error: Open sweep log file error");
         return;
     }
-
 
     //extract the sweep joint data q{idx} and qc{idx}
     char line[1024];
@@ -1233,7 +1263,15 @@ void winUI::plot_sinusoidalTest_result(char* log_path) {
     fclose(fs);
     int data_length = time.length();
     // delete previous plots
-    while (QLayoutItem* item = ui.sinusoidal_layout->takeAt(0)) {
+    while (QLayoutItem* item = ui.sinusoidal_layout_q->takeAt(0)) {
+        if (QWidget* widget = item->widget()) {
+            widget->deleteLater();
+        }
+        delete item;
+    }
+
+    // delete previous plots
+    while (QLayoutItem* item = ui.sinusoidal_layout_q_err->takeAt(0)) {
         if (QWidget* widget = item->widget()) {
             widget->deleteLater();
         }
@@ -1243,47 +1281,64 @@ void winUI::plot_sinusoidalTest_result(char* log_path) {
 
     // ------------------ Plot Joint data -------------------------
     for (int i = 0; i < 6; ++i) {
-        QCustomPlot* plot = new QCustomPlot;
+        QCustomPlot* plot_q = new QCustomPlot;
+        QCustomPlot* plot_err = new QCustomPlot;
 
         // Add two graphs to the plot
-        plot->addGraph();
-        plot->addGraph();
+        plot_q->addGraph(); // act
+        plot_q->addGraph(); // ref
+        plot_err->addGraph(); // ref
 
         // Set graph names for legend
-        plot->graph(0)->setName("act");
-        plot->graph(1)->setName("ref");
+        plot_q->graph(0)->setName("act");
+        plot_q->graph(1)->setName("ref");
+        plot_err->graph(0)->setName("tracking err");
+
         // Set colors for the two graphs
-        plot->graph(0)->setPen(QPen(Qt::blue));  // "ref" will be blue
-        plot->graph(1)->setPen(QPen(Qt::red));   // "act" will be red
+        plot_q->graph(0)->setPen(QPen(Qt::blue));  // "ref" will be blue
+        plot_q->graph(1)->setPen(QPen(Qt::red));   // "act" will be red
+        plot_err->graph(0)->setPen(QPen(Qt::red));
 
         // Set axis labels
-        plot->xAxis->setLabel("Time (s)");
-        plot->yAxis->setLabel("degree");
+        plot_q->xAxis->setLabel("Time (s)");
+        plot_q->yAxis->setLabel("degree");
+
+        plot_err->xAxis->setLabel("Time (s)");
+        plot_err->yAxis->setLabel("degree");
 
         // Add legend to the plot
-        plot->legend->setVisible(true);
-        plot->legend->setBrush(QBrush(QColor(255, 255, 255, 150)));
+        plot_q->legend->setVisible(true);
+        plot_q->legend->setBrush(QBrush(QColor(255, 255, 255, 150)));
+        plot_err->legend->setVisible(true);
+        plot_err->legend->setBrush(QBrush(QColor(255, 255, 255, 150)));
+
 
         // Set plot interactions
-        plot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectAxes | QCP::iSelectLegend | QCP::iSelectPlottables);
+        plot_q->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectAxes | QCP::iSelectLegend | QCP::iSelectPlottables);
+        plot_err->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectAxes | QCP::iSelectLegend | QCP::iSelectPlottables);
 
-        QVector<double> x(q.size());
+        QVector<double> x(q.size()), x_c(q.size()), x_err(q.size());
         for (int j = 0; j < q.size(); ++j) {
             x[j] = q[j][i];
+            x_c[j] = qc[j][i];
+            x_err[j] = qc[j][i] - q[j][i];
         }
-        plot->graph(0)->setData(time, x);
+        plot_q->graph(0)->setData(time, x);
+        plot_q->graph(1)->setData(time, x_c);
+        plot_err->graph(0)->setData(time, x_err);
 
-        for (int j = 0; j < qc.size(); ++j) {
-            x[j] = qc[j][i];
-        }
-        plot->graph(1)->setData(time, x);
+        plot_q->xAxis->setRange(time.first(), time.last());
+        plot_q->yAxis->rescale(true);
 
-        plot->xAxis->setRange(time.first(), time.last());
-        plot->yAxis->rescale(true);
-        plot->replot();
+        plot_err->xAxis->setRange(time.first(), time.last());
+        plot_err->yAxis->rescale(true);
+        plot_q->replot();
+        plot_err->replot();
 
         // Add plot to the vertical layout
-        ui.sinusoidal_layout->addWidget(plot);
+        ui.sinusoidal_layout_q->addWidget(plot_q);
+        ui.sinusoidal_layout_q_err->addWidget(plot_err);
+        plot_err->setVisible(FALSE);
     }
 }
 

@@ -115,3 +115,7 @@ Makefile
 *.recipe
 *.exp
 *.rtss
+*.ilk
+*.natvis
+*.pth
+*.jpg
